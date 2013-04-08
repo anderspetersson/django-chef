@@ -1,0 +1,32 @@
+user www-data;
+pid /var/run/nginx.pid;
+error_log /var/log/nginx/error.log;
+
+worker_processes 1;
+events {
+        worker_connections 200;
+}
+
+http {
+        include /etc/nginx/mime.types;
+
+        gzip on;
+        gzip_disable "msie6";
+
+        gzip_vary on;
+        gzip_proxied any;
+        gzip_comp_level 6;
+        gzip_buffers 16 8k;
+        gzip_http_version 1.1;
+        gzip_types text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript;
+
+        server_names_hash_bucket_size 64;
+        proxy_ignore_client_abort  on;
+
+        server_tokens off;
+
+        access_log off;
+
+        include /etc/nginx/conf.d/*.conf;
+        include /etc/nginx/sites-enabled/*;
+}

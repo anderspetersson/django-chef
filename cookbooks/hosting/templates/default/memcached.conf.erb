@@ -1,0 +1,6 @@
+-d
+logfile <%= node[:memcached][:logfile] %>
+-m <%= node[:memcached][:memory_limit] %>
+-p <%= node[:memcached][:listen_port] %>
+-u <%= node[:memcached][:user] %>
+-l <%= node[:memcached][:listen_adress] %>

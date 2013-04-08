@@ -1,0 +1,12 @@
+description "Gunicorn for <%= node[:site][:name] %>"
+start on runlevel [2345]
+stop on runlevel [!2345]
+kill timeout <%= node[:gunicorn][:timeout] %>
+respawn
+
+env VENV="/home/<%= node[:site][:user] %>/sites/<%= node[:site][:name] %>"
+
+script
+export DJANGO_SETTINGS_MODULE=<%= node[:gunicorn][:django_settings_path] %>
+exec sudo -u <%= node[:site][:user] %> $VENV/bin/gunicorn_django --preload -w <%= node[:gunicorn][:num_workers] %> --log-file $VENV/run/gunicorn.log -p $VENV/run/gunicorn.pid -b <%= node[:gunicorn][:listen_adress] %>:<%= node[:gunicorn][:listen_port] %> $VENV/src/<%= node[:gunicorn][:django_settings_file] %>
+end script
