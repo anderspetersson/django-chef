@@ -10,7 +10,7 @@ server {
 <% end %>
 
 server {
-    server_name <%= node[:nginx][:domain_name] %>;
+    server_name <% if node[:nginx][:force_www] -%>www.<% end %><%= node[:nginx][:domain_name] %>;
 
     access_log  /var/log/nginx/guni-access.log;
     error_log  /var/log/nginx/guni-error.log info;
