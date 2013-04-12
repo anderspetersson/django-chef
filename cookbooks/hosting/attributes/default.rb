@@ -1,6 +1,7 @@
 default[:site][:name] = "mysite"
 default[:site][:user] = "user"
 default[:site][:group] = "group"
+default[:site][:requirements_file] = "requirements.txt"
 
 default[:nginx][:domain_name] = "mysite.com"
 default[:nginx][:force_www] = false

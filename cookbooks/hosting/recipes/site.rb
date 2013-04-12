@@ -24,6 +24,6 @@ script "Install Requirements for #{node[:site][:name]}" do
   user "#{node[:site][:user]}"
   group "#{node[:site][:group]}"
   code <<-EOH
-  /home/anders/sites/#{node[:site][:name]}/bin/pip install -r /home/anders/sites/#{node[:site][:name]}/src/#{node[:site][:name]}/requirements.txt
+  /home/{node[:site][:user]}/sites/#{node[:site][:name]}/bin/pip install -r /home/{node[:site][:user]}/sites/#{node[:site][:name]}/src/#{node[:site][:name]}/#{node[:site][:requirements_file]}
   EOH
 end
